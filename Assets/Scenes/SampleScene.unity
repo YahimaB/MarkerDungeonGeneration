@@ -872,7 +872,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _showDebug: 0
-  _extraRoomCount: 5
+  _extraRoomCount: 10
   _minSpawnRadius: 5
   _radiusOffsetMultiplier: 0.5
   _radiusIntersectMultiplier: 1.25
@@ -930,25 +930,25 @@ MonoBehaviour:
     - rid: 6541094036365901826
       type: {class: EdgesCountRater, ns: Graph.GeneticSearch.Raters, asm: Assembly-CSharp}
       data:
-        _weight: 0
+        _weight: 100
         _edgesFilling: 0
     - rid: 6541094036365901827
       type: {class: BranchingRater, ns: Graph.GeneticSearch.Raters, asm: Assembly-CSharp}
       data:
-        _weight: 0
+        _weight: 100
         _branchingRate: 0
     - rid: 6541094036365901828
       type: {class: SlopeRater, ns: Graph.GeneticSearch.Raters, asm: Assembly-CSharp}
       data:
-        _weight: 0
-        _slopeRate: 0
+        _weight: 1
+        _slopeRate: 50
     - rid: 6541094036365901831
       type: {class: KeyLocksRater, ns: Graph.GeneticSearch.Raters, asm: Assembly-CSharp}
       data: 
     - rid: 6541094094798323712
       type: {class: EdgeLengthRater, ns: Graph.GeneticSearch.Raters, asm: Assembly-CSharp}
       data:
-        _weight: 100
+        _weight: 1
         _lengthRate: 50
 --- !u!4 &2029714994
 Transform:
