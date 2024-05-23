@@ -49,7 +49,7 @@
 
 ## Дополнительно
 
-Полный текст работы можно найти [на GitHub](Docs/MarkerDungeonGeneration.pdf)
+Автор: Боев Ярослав <br>Полный текст работы можно найти [на GitHub](Docs/MarkerDungeonGeneration.pdf)</br>
 
 Кодстайл для языка С# соответствует таковому указанному на [сайте Microsoft](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/identifier-names)
 
