@@ -6,6 +6,7 @@ using Analysis.Analyzers;
 using Analysis.GeneticAnalyzers;
 using Generation;
 using UnityEngine;
+using Utils.ClassTypeReference;
 using Debug = UnityEngine.Debug;
 
 namespace Analysis
@@ -16,33 +17,51 @@ namespace Analysis
         [SerializeField] private int _totalGenerations = 100;
         [SerializeField] private int _stepCount = 10;
         [SerializeField] private Generator _generator;
+        
+        [SerializeField]
+        [ClassExtends(typeof(Analyzer))]
+        public List<ClassTypeReference> _analyzerTypes;
 
         private readonly Stopwatch _timer = new();
 
-        private List<Analyzer> _analyzers;
+        private readonly List<Analyzer> _analyzers = new();
         private TimeAnalyzer _timeAnalyzer;
 
         private void Start()
         {
-            _timeAnalyzer = new TimeAnalyzer();
-
-            _analyzers = new List<Analyzer>
+            _analyzers.Clear();
+            
+            foreach (var analyzerType in _analyzerTypes)
             {
-                // new TestAnalyzer(),
-                // new TotalVolumeAnalyzer(),
-                // new RelativeVolumeAnalyzer(),
-                // new RoomCountAnalyzer(),
-                // new RoomSizeAnalyzer(), //TODO: deviation
-                // new AvailabilityAnalyzer(),
-                // new CorridorCountAnalyzer(),
-                // new CorridorLengthAnalyzer(),
-                // new LinearAnalyzer(),
-                // new EdgesFillingAnalyzer(),
-                // new BranchingRateAnalyzer(),
-                // new SlopeRateAnalyzer(),
-                new EdgesLengthAnalyzer(),
-                _timeAnalyzer
-            };
+                if (analyzerType?.Type == null)
+                {
+                    continue;
+                }
+                
+                var analyzer = (Analyzer)Activator.CreateInstance(analyzerType.Type);
+                _analyzers.Add(analyzer);
+            }
+            
+            _timeAnalyzer = new TimeAnalyzer();
+            _analyzers.Add(_timeAnalyzer);
+
+            // _analyzers = new List<Analyzer>
+            // {
+            //     // new TestAnalyzer(),
+            //     // new TotalVolumeAnalyzer(),
+            //     // new RelativeVolumeAnalyzer(),
+            //     // new RoomCountAnalyzer(),
+            //     // new RoomSizeAnalyzer(), //TODO: deviation
+            //     // new AvailabilityAnalyzer(),
+            //     // new CorridorCountAnalyzer(),
+            //     // new CorridorLengthAnalyzer(),
+            //     // new LinearAnalyzer(),
+            //     // new EdgesFillingAnalyzer(),
+            //     // new BranchingRateAnalyzer(),
+            //     // new SlopeRateAnalyzer(),
+            //     new EdgesLengthAnalyzer(),
+            //     _timeAnalyzer
+            // };
 
             if (_demoMode)
             {

@@ -1,3 +1,28 @@
+/* Adapted from https://github.com/Bl4ckb0ne/delaunay-triangulation
+
+Copyright (c) 2015-2019 Simon Zeni (simonzeni@gmail.com)
+
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.*/
+
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,19 +32,17 @@ namespace Graph.Delone
     {
         public List<Vertex> Vertices { get; private set; }
         public List<Edge> Edges { get; private set; }
-        public List<Triangle> Triangles { get; private set; }
         public List<Tetrahedron> Tetrahedra { get; private set; }
 
         private Delone3D()
         {
             Edges = new List<Edge>();
-            Triangles = new List<Triangle>();
             Tetrahedra = new List<Tetrahedron>();
         }
 
         public static Delone3D Triangulate(List<Vertex> vertices)
         {
-            Delone3D delone = new Delone3D();
+            var delone = new Delone3D();
             delone.Vertices = new List<Vertex>(vertices);
             delone.Triangulate();
 
@@ -35,7 +58,7 @@ namespace Graph.Delone
             var maxY = minY;
             var maxZ = minZ;
 
-            foreach (Vertex vertex in Vertices)
+            foreach (var vertex in Vertices)
             {
                 if (vertex.Position.x < minX) minX = vertex.Position.x;
                 if (vertex.Position.x > maxX) maxX = vertex.Position.x;
@@ -50,11 +73,11 @@ namespace Graph.Delone
             var dz = maxZ - minZ;
             var deltaMax = Mathf.Max(dx, dy, dz) * 2;
 
-            Vertex p1 = new Vertex(new Vector3(minX - deltaMax, minY - 1, minZ - deltaMax));
+            var p1 = new Vertex(new Vector3(minX - deltaMax, minY - 1, minZ - deltaMax));
             // Vertex p1 = new Vertex(new Vector3(minX - 1, minY - 1, minZ - 1));
-            Vertex p2 = new Vertex(new Vector3(maxX + deltaMax, minY - 1, minZ - 1));
-            Vertex p3 = new Vertex(new Vector3(minX - 1, maxY + deltaMax, minZ - 1));
-            Vertex p4 = new Vertex(new Vector3(minX - 1, minY - 1, maxZ + deltaMax));
+            var p2 = new Vertex(new Vector3(maxX + deltaMax, minY - 1, minZ - 1));
+            var p3 = new Vertex(new Vector3(minX - 1, maxY + deltaMax, minZ - 1));
+            var p4 = new Vertex(new Vector3(minX - 1, minY - 1, maxZ + deltaMax));
 
             //Добавить внешний тетраэдр основу
             Tetrahedra.Add(new Tetrahedron(p1, p2, p3, p4));
@@ -102,36 +125,18 @@ namespace Graph.Delone
                 }
             }
 
-            Tetrahedra.RemoveAll((Tetrahedron t) => t.ContainsVertex(p1) || t.ContainsVertex(p2) || t.ContainsVertex(p3) || t.ContainsVertex(p4));
+            Tetrahedra.RemoveAll(t => t.ContainsVertex(p1) || t.ContainsVertex(p2) || t.ContainsVertex(p3) || t.ContainsVertex(p4));
 
-            HashSet<Triangle> triangleSet = new HashSet<Triangle>();
-            HashSet<Edge> edgeSet = new HashSet<Edge>();
+            var edgeSet = new HashSet<Edge>();
 
-            foreach (Tetrahedron t in Tetrahedra)
+            foreach (var t in Tetrahedra)
             {
-                Triangle abc = new Triangle(t.A, t.B, t.C);
-                Triangle abd = new Triangle(t.A, t.B, t.D);
-                Triangle acd = new Triangle(t.A, t.C, t.D);
-                Triangle bcd = new Triangle(t.B, t.C, t.D);
-
-                if (triangleSet.Add(abc))
-                    Triangles.Add(abc);
-
-                if (triangleSet.Add(abd))
-                    Triangles.Add(abd);
-
-                if (triangleSet.Add(acd))
-                    Triangles.Add(acd);
-
-                if (triangleSet.Add(bcd))
-                    Triangles.Add(bcd);
-
-                Edge ab = new Edge(t.A, t.B);
-                Edge bc = new Edge(t.B, t.C);
-                Edge ca = new Edge(t.C, t.A);
-                Edge da = new Edge(t.D, t.A);
-                Edge db = new Edge(t.D, t.B);
-                Edge dc = new Edge(t.D, t.C);
+                var ab = new Edge(t.A, t.B);
+                var bc = new Edge(t.B, t.C);
+                var ca = new Edge(t.C, t.A);
+                var da = new Edge(t.D, t.A);
+                var db = new Edge(t.D, t.B);
+                var dc = new Edge(t.D, t.C);
 
                 if (edgeSet.Add(ab))
                     Edges.Add(ab);

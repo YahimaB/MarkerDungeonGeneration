@@ -935,7 +935,7 @@ MonoBehaviour:
     - rid: 6541094036365901827
       type: {class: BranchingRater, ns: Graph.GeneticSearch.Raters, asm: Assembly-CSharp}
       data:
-        _weight: 100
+        _weight: 1
         _branchingRate: 0
     - rid: 6541094036365901828
       type: {class: SlopeRater, ns: Graph.GeneticSearch.Raters, asm: Assembly-CSharp}
@@ -978,10 +978,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _demoMode: 1
-  _totalGenerations: 500
-  _stepCount: 100
+  _totalGenerations: 10
+  _stepCount: 1
   _generator: {fileID: 2029714993}
-  _cellObjectTag: Dungeon
+  _analyzerTypes:
+  - _classRef: Analysis.Analyzers.CorridorCountAnalyzer, Assembly-CSharp
+  - _classRef: Analysis.GeneticAnalyzers.EdgesFillingAnalyzer, Assembly-CSharp
 --- !u!1001 &2086957861
 PrefabInstance:
   m_ObjectHideFlags: 0
