@@ -16,7 +16,6 @@ namespace Analysis
         [SerializeField] private int _totalGenerations = 100;
         [SerializeField] private int _stepCount = 10;
         [SerializeField] private Generator _generator;
-        [SerializeField] private string _cellObjectTag;
 
         private readonly Stopwatch _timer = new();
 
@@ -110,15 +109,6 @@ namespace Analysis
             Debug.Log($"REAL TIME: {endTime - startTime} seconds");
 
             UnityEditor.EditorApplication.isPlaying = false;
-        }
-
-        private void ClearObjects()
-        {
-            var cellObjects = GameObject.FindGameObjectsWithTag(_cellObjectTag);
-            for (var i = 0; i < cellObjects.Length; i++)
-            {
-                Destroy(cellObjects[i]);
-            }
         }
     }
 }
