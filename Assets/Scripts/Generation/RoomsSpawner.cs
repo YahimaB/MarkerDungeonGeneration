@@ -59,6 +59,8 @@ public class RoomsSpawner : MonoBehaviour
         _fillGrid = new Grid3D<bool>(Context.GridSize);
 
         SpawnInitRooms();
+        Context.PreSetup();
+
         SpawnExtraRooms();
 
         // SpawnRoomsSeeds(Context.GridSize);
@@ -340,7 +342,7 @@ public class RoomsSpawner : MonoBehaviour
     {
         if (!_showDebug)
             return;
-        
+
         var offset = Vector3.one * 0.5f;
         if (_fillGrid != null)
         {
