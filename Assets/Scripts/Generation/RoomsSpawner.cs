@@ -59,7 +59,7 @@ public class RoomsSpawner : MonoBehaviour
         _fillGrid = new Grid3D<bool>(Context.GridSize);
 
         SpawnInitRooms();
-        Context.PreSetup();
+        Context.PostCreation();
 
         SpawnExtraRooms();
 

@@ -61,11 +61,11 @@ namespace Generation
             Rates = rates;
         }
 
-        public void PreSetup()
+        public void PostCreation()
         {
             foreach (var room in Rooms)
             {
-                room.PreSetup();
+                room.PostCreation();
             }
         }
 

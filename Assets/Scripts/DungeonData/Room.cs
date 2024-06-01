@@ -16,7 +16,7 @@ namespace DungeonData
         public virtual string IconName => "";
         public virtual Color Color => new(1f, 0f, 0f, 1f);
 
-        private List<GenerationAction> _preSetupActions = new List<GenerationAction>();
+        private List<GenerationAction> _postCreationActions = new List<GenerationAction>();
         private List<GenerationAction> _preTreeBuildActions = new List<GenerationAction>();
         private List<GenerationAction> _postGenValidateActions = new List<GenerationAction>();
 
@@ -37,11 +37,11 @@ namespace DungeonData
             return a.Bounds.Intersects(b.Bounds);
         }
 
-        public Room WithPreSetupActions(IEnumerable<GenerationAction> actions)
+        public Room WithPostCreationActions(IEnumerable<GenerationAction> actions)
         {
-            _preSetupActions.Clear();
-            _preSetupActions.AddRange(actions);
-            _preSetupActions.ForEach(x => x.HostRoom = this);
+            _postCreationActions.Clear();
+            _postCreationActions.AddRange(actions);
+            _postCreationActions.ForEach(x => x.HostRoom = this);
             return this;
         }
 
@@ -61,9 +61,9 @@ namespace DungeonData
             return this;
         }
 
-        public void PreSetup()
+        public void PostCreation()
         {
-            foreach (var action in _preSetupActions)
+            foreach (var action in _postCreationActions)
             {
                 action.Run();
             }

@@ -21,10 +21,10 @@ namespace DungeonControls
         private Room _room = null;
 
         [SerializeField]
-        public List<GenerationActionHolder> _preSetupActions = new List<GenerationActionHolder>();
+        public List<GenerationActionHolder> _postCreationActions = new List<GenerationActionHolder>();
 
         [SerializeField]
-        public List<GenerationActionHolder> _preTreeBuildActions = new List<GenerationActionHolder>();
+        public List<GenerationActionHolder> _preSubgraphBuildActions = new List<GenerationActionHolder>();
 
         [SerializeField]
         public List<GenerationActionHolder> _postGenValidateActions = new List<GenerationActionHolder>();
@@ -33,12 +33,12 @@ namespace DungeonControls
         {
             ValidateTypedObject(_roomType, ref _room);
 
-            foreach (var genAction in _preSetupActions)
+            foreach (var genAction in _postCreationActions)
             {
                 ValidateTypedObject(genAction.ActionType, ref genAction.Action);
             }
 
-            foreach (var genAction in _preTreeBuildActions)
+            foreach (var genAction in _preSubgraphBuildActions)
             {
                 ValidateTypedObject(genAction.ActionType, ref genAction.Action);
             }
@@ -103,8 +103,8 @@ namespace DungeonControls
         public Room GenerateRoom()
         {
             _room.Bounds = new BoundsInt(GetBoundsPosInt(), Vector3Int.one);
-            _room.WithPreSetupActions(_preSetupActions.Select(x => x.Action))
-                .WithPreTreeBuildActions(_preTreeBuildActions.Select(x => x.Action))
+            _room.WithPostCreationActions(_postCreationActions.Select(x => x.Action))
+                .WithPreTreeBuildActions(_preSubgraphBuildActions.Select(x => x.Action))
                 .WithPostGenValidateActions(_postGenValidateActions.Select(x => x.Action));
             return _room;
         }
