@@ -414,6 +414,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6976317036268825399, guid: d129ca4bf441041c2bcf84acb37d4969, type: 3}
+      propertyPath: _preSubgraphBuildActions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6976317036268825399, guid: d129ca4bf441041c2bcf84acb37d4969, type: 3}
+      propertyPath: managedReferences[3879024333311180800]
+      value: Assembly-CSharp DungeonControls.EnsureConnectionAction
+      objectReference: {fileID: 0}
+    - target: {fileID: 6976317036268825399, guid: d129ca4bf441041c2bcf84acb37d4969, type: 3}
       propertyPath: managedReferences[4521464664055087179]
       value: Assembly-CSharp DungeonControls.RoomExistsAction
       objectReference: {fileID: 0}
@@ -486,6 +494,14 @@ PrefabInstance:
       value: 4521464733618667521
       objectReference: {fileID: 0}
     - target: {fileID: 6976317036268825399, guid: d129ca4bf441041c2bcf84acb37d4969, type: 3}
+      propertyPath: _preSubgraphBuildActions.Array.data[0].Action
+      value: 3879024333311180800
+      objectReference: {fileID: 0}
+    - target: {fileID: 6976317036268825399, guid: d129ca4bf441041c2bcf84acb37d4969, type: 3}
+      propertyPath: managedReferences[3879024333311180800]._targetNode
+      value: 
+      objectReference: {fileID: 653937218}
+    - target: {fileID: 6976317036268825399, guid: d129ca4bf441041c2bcf84acb37d4969, type: 3}
       propertyPath: managedReferences[6541094036365901824]._targetNode
       value: 
       objectReference: {fileID: 653937218}
@@ -493,6 +509,10 @@ PrefabInstance:
       propertyPath: managedReferences[6541094071215849499]._targetNode
       value: 
       objectReference: {fileID: 653937218}
+    - target: {fileID: 6976317036268825399, guid: d129ca4bf441041c2bcf84acb37d4969, type: 3}
+      propertyPath: managedReferences[3879024333311180800]._removeOthers
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6976317036268825399, guid: d129ca4bf441041c2bcf84acb37d4969, type: 3}
       propertyPath: managedReferences[6541094036365901824]._removeOthers
       value: 1
@@ -544,6 +564,10 @@ PrefabInstance:
     - target: {fileID: 6976317036268825399, guid: d129ca4bf441041c2bcf84acb37d4969, type: 3}
       propertyPath: managedReferences[6541094071215849499]._roomType._classRef
       value: DungeonData.BossRoom, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6976317036268825399, guid: d129ca4bf441041c2bcf84acb37d4969, type: 3}
+      propertyPath: _preSubgraphBuildActions.Array.data[0].ActionType._classRef
+      value: DungeonControls.EnsureConnectionAction, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
