@@ -125,7 +125,7 @@ namespace Graph.Delone
                 }
             }
 
-            Tetrahedra.RemoveAll(t => t.ContainsVertex(p1) || t.ContainsVertex(p2) || t.ContainsVertex(p3) || t.ContainsVertex(p4));
+            // Tetrahedra.RemoveAll(t => t.ContainsVertex(p1) || t.ContainsVertex(p2) || t.ContainsVertex(p3) || t.ContainsVertex(p4));
 
             var edgeSet = new HashSet<Edge>();
 
@@ -138,23 +138,41 @@ namespace Graph.Delone
                 var db = new Edge(t.D, t.B);
                 var dc = new Edge(t.D, t.C);
 
-                if (edgeSet.Add(ab))
-                    Edges.Add(ab);
+                edgeSet.Add(ab);
+                edgeSet.Add(bc);
+                edgeSet.Add(ca);
+                edgeSet.Add(da);
+                edgeSet.Add(db);
+                edgeSet.Add(dc);
 
-                if (edgeSet.Add(bc))
-                    Edges.Add(bc);
+                
+                // if (edgeSet.Add(ab))
+                //     Edges.Add(ab);
+                //
+                // if (edgeSet.Add(bc))
+                //     Edges.Add(bc);
+                //
+                // if (edgeSet.Add(ca))
+                //     Edges.Add(ca);
+                //
+                // if (edgeSet.Add(da))
+                //     Edges.Add(da);
+                //
+                // if (edgeSet.Add(db))
+                //     Edges.Add(db);
+                //
+                // if (edgeSet.Add(dc))
+                //     Edges.Add(dc);
+            }
 
-                if (edgeSet.Add(ca))
-                    Edges.Add(ca);
-
-                if (edgeSet.Add(da))
-                    Edges.Add(da);
-
-                if (edgeSet.Add(db))
-                    Edges.Add(db);
-
-                if (edgeSet.Add(dc))
-                    Edges.Add(dc);
+            foreach (var edge in edgeSet)
+            {
+                if (edge.V == p1 || edge.V == p2 || edge.V == p3 || edge.V == p4
+                    || edge.U == p1 || edge.U == p2 || edge.U == p3 || edge.U == p4)
+                {
+                    continue;
+                }
+                Edges.Add(edge);
             }
         }
     }
